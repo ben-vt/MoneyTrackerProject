@@ -6,15 +6,13 @@
     <edmx:Diagrams>
       <Diagram DiagramId="95e30fe9547a4aee94ee731a7802e83b" Name="Diagram1" ZoomLevel="82" >
         <EntityTypeShape EntityType="MoneyTrackerDBModel.Department" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="MoneyTrackerDBModel.Employee" Width="1.5" PointX="8" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoneyTrackerDBModel.Employee" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="MoneyTrackerDBModel.DepartmentEmployee" />
         <EntityTypeShape EntityType="MoneyTrackerDBModel.Transaction" Width="1.5" PointX="6.5" PointY="3.625" />
         <AssociationConnector Association="MoneyTrackerDBModel.DepartmentTransaction" />
         <AssociationConnector Association="MoneyTrackerDBModel.EmployeeTransaction" />
         <EntityTypeShape EntityType="MoneyTrackerDBModel.TransactionMode" Width="1.5" PointX="9.625" PointY="4.25" />
         <AssociationConnector Association="MoneyTrackerDBModel.TransactionTransactionMode" />
-        <EntityTypeShape EntityType="MoneyTrackerDBModel.SystemUser" Width="1.5" PointX="10.875" PointY="0.75" />
-        <AssociationConnector Association="MoneyTrackerDBModel.EmployeeSystemUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

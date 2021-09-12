@@ -36,7 +36,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Register", "Create", "SystemUsers")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Department", "Index", "Departments")</li>
+                        <li>@Html.ActionLink("Employee", "Index", "Employees")</li>
+                        <li>@Html.ActionLink("Transaction", "Index", "Transactions")</li>
+                    }
                     @*<li>@Html.ActionLink("Departments", "Index", "Departments")</li>*@
                     @*<li>@Html.ActionLink("Transactions", "Index", "Transactions")</li>*@
                 </ul>

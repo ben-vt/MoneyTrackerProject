@@ -10,7 +10,6 @@
     <EntitySet Name="Employees" EntityType="MoneyTrackerDBModel.Store.Employees" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Transactions" EntityType="MoneyTrackerDBModel.Store.Transactions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TransactionModes" EntityType="MoneyTrackerDBModel.Store.TransactionModes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="SystemUsers" EntityType="MoneyTrackerDBModel.Store.SystemUsers" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="DepartmentEmployee" Association="MoneyTrackerDBModel.Store.DepartmentEmployee">
       <End Role="Department" EntitySet="Departments" />
       <End Role="Employee" EntitySet="Employees" />
@@ -26,10 +25,6 @@
     <AssociationSet Name="TransactionTransactionMode" Association="MoneyTrackerDBModel.Store.TransactionTransactionMode">
       <End Role="Transaction" EntitySet="Transactions" />
       <End Role="TransactionMode" EntitySet="TransactionModes" />
-    </AssociationSet>
-    <AssociationSet Name="EmployeeSystemUser" Association="MoneyTrackerDBModel.Store.EmployeeSystemUser">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="SystemUser" EntitySet="SystemUsers" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Departments">
@@ -48,7 +43,9 @@
     <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="EmployeeRole" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DeptId" Type="int" Nullable="false" />
-    <Property Name="SystemUser_UserId" Type="int" Nullable="false" />
+    <Property Name="EmployeeEmail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Transactions">
     <Key>
@@ -68,16 +65,6 @@
     </Key>
     <Property Name="ModeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Mode" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="SystemUsers">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AdminRole" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="DepartmentEmployee">
     <End Role="Department" Type="MoneyTrackerDBModel.Store.Departments" Multiplicity="1" />
@@ -127,18 +114,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="EmployeeSystemUser">
-    <End Role="Employee" Type="MoneyTrackerDBModel.Store.Employees" Multiplicity="*" />
-    <End Role="SystemUser" Type="MoneyTrackerDBModel.Store.SystemUsers" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="SystemUser">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="Employee">
-        <PropertyRef Name="SystemUser_UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -164,11 +139,6 @@
             <End Role="Transaction" EntitySet="Transactions" />
             <End Role="TransactionMode" EntitySet="TransactionModes" />
           </AssociationSet>
-          <EntitySet Name="SystemUsers" EntityType="MoneyTrackerDBModel.SystemUser" />
-          <AssociationSet Name="EmployeeSystemUser" Association="MoneyTrackerDBModel.EmployeeSystemUser">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="SystemUser" EntitySet="SystemUsers" />
-          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Department">
           <Key>
@@ -190,7 +160,9 @@
           <NavigationProperty Name="Department" Relationship="MoneyTrackerDBModel.DepartmentEmployee" FromRole="Employee" ToRole="Department" />
           <Property Name="DeptId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Transactions" Relationship="MoneyTrackerDBModel.EmployeeTransaction" FromRole="Employee" ToRole="Transaction" />
-          <NavigationProperty Name="SystemUser" Relationship="MoneyTrackerDBModel.EmployeeSystemUser" FromRole="Employee" ToRole="SystemUser" />
+          <Property Name="EmployeeEmail" Type="String" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="DepartmentEmployee">
           <End Type="MoneyTrackerDBModel.Department" Role="Department" Multiplicity="1" />
@@ -263,21 +235,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="SystemUser">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" />
-          <Property Name="Password" Type="String" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="MoneyTrackerDBModel.EmployeeSystemUser" FromRole="SystemUser" ToRole="Employee" />
-          <Property Name="Email" Type="String" Nullable="false" />
-          <Property Name="AdminRole" Type="String" Nullable="false" />
-        </EntityType>
-        <Association Name="EmployeeSystemUser">
-          <End Type="MoneyTrackerDBModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="MoneyTrackerDBModel.SystemUser" Role="SystemUser" Multiplicity="1" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -300,6 +257,9 @@
           <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
           <ScalarProperty Name="EmployeeRole" ColumnName="EmployeeRole" />
           <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+          <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -324,25 +284,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SystemUsers">
-      <EntityTypeMapping TypeName="IsTypeOf(MoneyTrackerDBModel.SystemUser)">
-        <MappingFragment StoreEntitySet="SystemUsers">
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="AdminRole" ColumnName="AdminRole" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="EmployeeSystemUser" TypeName="MoneyTrackerDBModel.EmployeeSystemUser" StoreEntitySet="Employees">
-      <EndProperty Name="SystemUser">
-        <ScalarProperty Name="UserId" ColumnName="SystemUser_UserId" />
-      </EndProperty>
-      <EndProperty Name="Employee">
-        <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

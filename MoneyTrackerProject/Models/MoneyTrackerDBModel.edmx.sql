@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/13/2021 01:21:50
+-- Date Created: 09/13/2021 02:38:50
 -- Generated from EDMX file: C:\Users\benva\source\repos\MoneyTrackerProject\MoneyTrackerProject\Models\MoneyTrackerDBModel.edmx
 -- --------------------------------------------------
 
@@ -29,9 +29,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TransactionTransactionMode]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_TransactionTransactionMode];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EmployeeSystemUser]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Employees] DROP CONSTRAINT [FK_EmployeeSystemUser];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -48,9 +45,6 @@ IF OBJECT_ID(N'[dbo].[Transactions]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[TransactionModes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TransactionModes];
-GO
-IF OBJECT_ID(N'[dbo].[SystemUsers]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SystemUsers];
 GO
 
 -- --------------------------------------------------
@@ -71,7 +65,9 @@ CREATE TABLE [dbo].[Employees] (
     [EmployeeName] nvarchar(max)  NOT NULL,
     [EmployeeRole] nvarchar(max)  NOT NULL,
     [DeptId] int  NOT NULL,
-    [SystemUser_UserId] int  NOT NULL
+    [EmployeeEmail] nvarchar(max)  NOT NULL,
+    [UserName] nvarchar(max)  NOT NULL,
+    [Password] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -91,16 +87,6 @@ GO
 CREATE TABLE [dbo].[TransactionModes] (
     [ModeId] int IDENTITY(1,1) NOT NULL,
     [Mode] nvarchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'SystemUsers'
-CREATE TABLE [dbo].[SystemUsers] (
-    [UserId] int IDENTITY(1,1) NOT NULL,
-    [UserName] nvarchar(max)  NOT NULL,
-    [Password] nvarchar(max)  NOT NULL,
-    [Email] nvarchar(max)  NOT NULL,
-    [AdminRole] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -130,12 +116,6 @@ GO
 ALTER TABLE [dbo].[TransactionModes]
 ADD CONSTRAINT [PK_TransactionModes]
     PRIMARY KEY CLUSTERED ([ModeId] ASC);
-GO
-
--- Creating primary key on [UserId] in table 'SystemUsers'
-ALTER TABLE [dbo].[SystemUsers]
-ADD CONSTRAINT [PK_SystemUsers]
-    PRIMARY KEY CLUSTERED ([UserId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -200,21 +180,6 @@ GO
 CREATE INDEX [IX_FK_TransactionTransactionMode]
 ON [dbo].[Transactions]
     ([FKTransModeId]);
-GO
-
--- Creating foreign key on [SystemUser_UserId] in table 'Employees'
-ALTER TABLE [dbo].[Employees]
-ADD CONSTRAINT [FK_EmployeeSystemUser]
-    FOREIGN KEY ([SystemUser_UserId])
-    REFERENCES [dbo].[SystemUsers]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeSystemUser'
-CREATE INDEX [IX_FK_EmployeeSystemUser]
-ON [dbo].[Employees]
-    ([SystemUser_UserId]);
 GO
 
 -- --------------------------------------------------

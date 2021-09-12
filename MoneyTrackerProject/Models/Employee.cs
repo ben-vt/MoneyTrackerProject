@@ -24,10 +24,12 @@ namespace MoneyTrackerProject.Models
         public string EmployeeName { get; set; }
         public string EmployeeRole { get; set; }
         public int DeptId { get; set; }
+        public string EmployeeEmail { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
     
         public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
-        public virtual SystemUser SystemUser { get; set; }
     }
 }

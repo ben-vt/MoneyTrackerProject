@@ -29,6 +29,5 @@ namespace MoneyTrackerProject.Models
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<TransactionMode> TransactionModes { get; set; }
-        public virtual DbSet<SystemUser> SystemUsers { get; set; }
     }
 }

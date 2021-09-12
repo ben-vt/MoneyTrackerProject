@@ -10,108 +10,107 @@ using MoneyTrackerProject.Models;
 
 namespace MoneyTrackerProject.Controllers
 {
-    public class SystemUsersController : Controller
+    public class DepartmentsController : Controller
     {
         private MoneyTrackerDBModelContainer db = new MoneyTrackerDBModelContainer();
 
-        // GET: SystemUsers
+        // GET: Departments
         public ActionResult Index()
         {
-            return View(db.SystemUsers.ToList());
+            return View(db.Departments.ToList());
         }
 
-        // GET: SystemUsers/Details/5
+        // GET: Departments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SystemUser systemUser = db.SystemUsers.Find(id);
-            if (systemUser == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return HttpNotFound();
             }
-            return View(systemUser);
+            return View(department);
         }
 
-        // GET: SystemUsers/Create
+        // GET: Departments/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: SystemUsers/Create
+        // POST: Departments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserId,UserName,Password,Email,AdminRole")] SystemUser systemUser)
+        public ActionResult Create([Bind(Include = "DepartmentId,DepartmentName,DepartmentFund")] Department department)
         {
             if (ModelState.IsValid)
             {
-                db.SystemUsers.Add(systemUser);
+                db.Departments.Add(department);
                 db.SaveChanges();
-                ViewBag.SuccessMessage = "Registration has been successful.";
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
 
-            return View(systemUser);
+            return View(department);
         }
 
-        // GET: SystemUsers/Edit/5
+        // GET: Departments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SystemUser systemUser = db.SystemUsers.Find(id);
-            if (systemUser == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return HttpNotFound();
             }
-            return View(systemUser);
+            return View(department);
         }
 
-        // POST: SystemUsers/Edit/5
+        // POST: Departments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,Password,Email,AdminRole")] SystemUser systemUser)
+        public ActionResult Edit([Bind(Include = "DepartmentId,DepartmentName,DepartmentFund")] Department department)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(systemUser).State = EntityState.Modified;
+                db.Entry(department).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(systemUser);
+            return View(department);
         }
 
-        // GET: SystemUsers/Delete/5
+        // GET: Departments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SystemUser systemUser = db.SystemUsers.Find(id);
-            if (systemUser == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return HttpNotFound();
             }
-            return View(systemUser);
+            return View(department);
         }
 
-        // POST: SystemUsers/Delete/5
+        // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SystemUser systemUser = db.SystemUsers.Find(id);
-            db.SystemUsers.Remove(systemUser);
+            Department department = db.Departments.Find(id);
+            db.Departments.Remove(department);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

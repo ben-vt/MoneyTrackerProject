@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/05/2021 17:39:40
+-- Date Created: 09/13/2021 02:38:50
 -- Generated from EDMX file: C:\Users\benva\source\repos\MoneyTrackerProject\MoneyTrackerProject\Models\MoneyTrackerDBModel.edmx
 -- --------------------------------------------------
 
@@ -64,26 +64,29 @@ CREATE TABLE [dbo].[Employees] (
     [EmployeeId] int IDENTITY(1,1) NOT NULL,
     [EmployeeName] nvarchar(max)  NOT NULL,
     [EmployeeRole] nvarchar(max)  NOT NULL,
-    [DeptId] int  NOT NULL
+    [DeptId] int  NOT NULL,
+    [EmployeeEmail] nvarchar(max)  NOT NULL,
+    [UserName] nvarchar(max)  NOT NULL,
+    [Password] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'Transactions'
 CREATE TABLE [dbo].[Transactions] (
     [TransactionId] int IDENTITY(1,1) NOT NULL,
-    [ExpenseAmount] nvarchar(max)  NOT NULL,
+    [ExpenseAmount] decimal(18,0)  NOT NULL,
     [TransactionDate] datetime  NOT NULL,
     [FKDeptId] int  NULL,
     [FKEmpId] int  NULL,
-    [FKTransModeId] int  NOT NULL
+    [FKTransModeId] int  NOT NULL,
+    [TransactionDescription] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'TransactionModes'
 CREATE TABLE [dbo].[TransactionModes] (
     [ModeId] int IDENTITY(1,1) NOT NULL,
-    [Mode] nvarchar(max)  NOT NULL,
-    [CreditCategoryCreditId] int  NOT NULL
+    [Mode] nvarchar(max)  NOT NULL
 );
 GO
 
