@@ -11,9 +11,7 @@ namespace MoneyTrackerProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,25 +21,11 @@ namespace MoneyTrackerProject.Models
         }
     
         public int EmployeeId { get; set; }
-        [DisplayName("Employee Name")]
-        [Required(ErrorMessage = "Please provide the employee's name.")]
         public string EmployeeName { get; set; }
-        [DisplayName("Employee Role")]
-        [Required(ErrorMessage = "Please provide the employee's role.")]
         public string EmployeeRole { get; set; }
         public int DeptId { get; set; }
-
-        [DisplayName("Employee Email")]
-        [Required(ErrorMessage = "Please provide the employee's email address.")]
         public string EmployeeEmail { get; set; }
-
-        [DisplayName("User Name")]
-        [Required(ErrorMessage = "Please set a username for the employee.")]
         public string UserName { get; set; }
-
-        [DisplayName("Password")]
-        [Required(ErrorMessage = "Please provide a password for the user profile.")]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
     
         public virtual Department Department { get; set; }

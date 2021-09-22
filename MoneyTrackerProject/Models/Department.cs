@@ -11,9 +11,7 @@ namespace MoneyTrackerProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Department
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,11 +22,7 @@ namespace MoneyTrackerProject.Models
         }
     
         public int DepartmentId { get; set; }
-        [DisplayName("Department Name")]
-        [Required(ErrorMessage ="Please provide a department name.")]
         public string DepartmentName { get; set; }
-        [DisplayName("Department Fund")]
-        [Required(ErrorMessage = "Please provide the department's fund allocation.")]
         public string DepartmentFund { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
