@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="95e30fe9547a4aee94ee731a7802e83b" Name="Diagram1" ZoomLevel="94" >
+      <Diagram DiagramId="95e30fe9547a4aee94ee731a7802e83b" Name="Diagram1" ZoomLevel="82" >
         <EntityTypeShape EntityType="MoneyTrackerDBModel.Department" Width="1.5" PointX="5.25" PointY="0.75" />
         <EntityTypeShape EntityType="MoneyTrackerDBModel.Employee" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="MoneyTrackerDBModel.DepartmentEmployee" />

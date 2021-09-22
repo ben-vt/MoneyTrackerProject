@@ -11,7 +11,9 @@ namespace MoneyTrackerProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Transaction
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +23,24 @@ namespace MoneyTrackerProject.Models
         }
     
         public int TransactionId { get; set; }
+        [DisplayName("Amount")]
+        [Required(ErrorMessage = "Please provide the amount.")]
         public decimal ExpenseAmount { get; set; }
+        [DisplayName("Transaction Date: ")]
+        [Required(ErrorMessage = "Please provide the date of the transaction.")]
         public System.DateTime TransactionDate { get; set; }
+        [DisplayName("Expense of Department: ")]
+        [Required(ErrorMessage = "Please provide the department which incured the expense.")]
         public Nullable<int> FKDeptId { get; set; }
+        [DisplayName("Expense of Employee: ")]
+        [Required(ErrorMessage = "Please provide the employee who incured the expense.")]
         public Nullable<int> FKEmpId { get; set; }
+        [DisplayName("Mode of Transaction")]
+        [Required(ErrorMessage = "Please choose between credit or debit.")]
         public int FKTransModeId { get; set; }
+
+        [DisplayName("Transaction Description")]
+        [Required(ErrorMessage = "Please provide a description of the transaction.")]
         public string TransactionDescription { get; set; }
     
         public virtual Department Department { get; set; }
