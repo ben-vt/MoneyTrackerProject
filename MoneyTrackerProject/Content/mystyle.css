@@ -1,19 +1,19 @@
-﻿<style >
-.navbar {
-    background-color: #edf5e1;
-}
+﻿<style>
+    .navbar {
+        background-color: #edf5e1;
+    }
 
-.navbar-inverse .navbar-nav > li > a {
-    transition: all 0.3s ease 0s;
-    color: #5cdb95;
-}
+    .navbar-inverse .navbar-nav > li > a {
+        transition: all 0.3s ease 0s;
+        color: #5cdb95;
+    }
 
     .navbar-inverse .navbar-nav > li > a:hover {
         color: #05386b;
     }
 
-.navbar-collapse {
-    font-weight: bold;
-}
+    .navbar-collapse {
+        font-weight: bold;
+    }
 
-</style >
+</style>
