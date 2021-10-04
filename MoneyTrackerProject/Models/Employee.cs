@@ -25,7 +25,6 @@ namespace MoneyTrackerProject.Models
         public int EmployeeId { get; set; }
         [DisplayName("Employee Name")]
         [Required(ErrorMessage = "Please provide the employee's name.")]
-        //This is the field for the employee name
         public string EmployeeName { get; set; }
         [DisplayName("Employee Role")]
         [Required(ErrorMessage = "Please provide the employee's role.")]
