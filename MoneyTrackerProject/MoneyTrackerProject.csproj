@@ -220,6 +220,8 @@
     <Content Include="App_Data\MoneyTrackerDB_log.ldf">
       <DependentUpon>MoneyTrackerDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-datepicker.css" />
+    <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -240,6 +242,8 @@
       <LastGenOutput>MoneyTrackerDBModel.cs</LastGenOutput>
       <DependentUpon>MoneyTrackerDBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\MoneyTrackerDBModel.edmx">
@@ -249,6 +253,7 @@
     <Content Include="Models\MoneyTrackerDBModel.edmx.diagram">
       <DependentUpon>MoneyTrackerDBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-datepicker.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
