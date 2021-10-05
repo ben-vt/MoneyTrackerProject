@@ -33,7 +33,7 @@ namespace MoneyTrackerProject.Models
         [Required(ErrorMessage = "Please provide the department which incured the expense.")]
         public Nullable<int> FKDeptId { get; set; }
         [DisplayName("Expense of Employee: ")]
-        [Required(ErrorMessage = "Please provide the employee who incured the expense.")]
+        //[Required(ErrorMessage = "Please provide the employee who incured the expense.")]
         public Nullable<int> FKEmpId { get; set; }
         [DisplayName("Mode of Transaction")]
         [Required(ErrorMessage = "Please choose between credit or debit.")]
