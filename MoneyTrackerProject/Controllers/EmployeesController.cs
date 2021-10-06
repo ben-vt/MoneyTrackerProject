@@ -48,7 +48,7 @@ namespace MoneyTrackerProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeId,EmployeeName,EmployeeRole,DeptId,EmployeeEmail,UserName,Password")] Employee employee)
+        public ActionResult Create([Bind(Include = "EmployeeId,EmployeeName,EmployeeRole,DeptId,EmployeeEmail")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace MoneyTrackerProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeId,EmployeeName,EmployeeRole,DeptId,EmployeeEmail,UserName,Password")] Employee employee)
+        public ActionResult Edit([Bind(Include = "EmployeeId,EmployeeName,EmployeeRole,DeptId,EmployeeEmail")] Employee employee)
         {
             if (ModelState.IsValid)
             {

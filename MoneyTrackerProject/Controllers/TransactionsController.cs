@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MoneyTrackerProject.Models;
+using Microsoft.AspNet.Identity;
+using System.Web.Security;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace MoneyTrackerProject.Controllers
 {
@@ -18,8 +21,20 @@ namespace MoneyTrackerProject.Controllers
         // GET: Transactions
         public ActionResult Index()
         {
-            var transactions = db.Transactions.Include(t => t.Department).Include(t => t.Employee).Include(t => t.TransactionMode);
-            return View(transactions.ToList());
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userId = User.Identity.GetUserId();
+            IEnumerable<String> roleId = userManager.FindById(userId).Roles.Select(r => r.RoleId);
+            if (roleId != null && roleId.GetEnumerator().MoveNext())
+            {
+                int rid = Convert.ToInt32(roleId.ElementAt(0));
+                var transactions = db.Transactions.Where(t => t.FKDeptId == rid);
+                //var transactions = db.Transactions.Include(t => t.Department).Include(t => t.Employee).Include(t => t.TransactionMode);
+                return View(transactions.ToList());
+            }
+            else
+            {
+                return View("~/Views/Home/Unauthorized.cshtml");
+            }
         }
 
         // GET: Transactions/Details/5

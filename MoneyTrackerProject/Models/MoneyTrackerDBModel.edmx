@@ -44,8 +44,6 @@
     <Property Name="EmployeeRole" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DeptId" Type="int" Nullable="false" />
     <Property Name="EmployeeEmail" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Transactions">
     <Key>
@@ -161,8 +159,6 @@
           <Property Name="DeptId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Transactions" Relationship="MoneyTrackerDBModel.EmployeeTransaction" FromRole="Employee" ToRole="Transaction" />
           <Property Name="EmployeeEmail" Type="String" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" />
-          <Property Name="Password" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="DepartmentEmployee">
           <End Type="MoneyTrackerDBModel.Department" Role="Department" Multiplicity="1" />
@@ -258,8 +254,6 @@
           <ScalarProperty Name="EmployeeRole" ColumnName="EmployeeRole" />
           <ScalarProperty Name="DeptId" ColumnName="DeptId" />
           <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

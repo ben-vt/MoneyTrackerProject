@@ -23,18 +23,22 @@ namespace MoneyTrackerProject.Models
         }
     
         public int TransactionId { get; set; }
+
         [DisplayName("Amount")]
         [Required(ErrorMessage = "Please provide the amount.")]
         public decimal ExpenseAmount { get; set; }
-        [DisplayName("Transaction Date: ")]
+
+        [DisplayName("Transaction Date")]
         [Required(ErrorMessage = "Please provide the date of the transaction.")]
         public System.DateTime TransactionDate { get; set; }
-        [DisplayName("Expense of Department: ")]
+
+        [DisplayName("Expense of Department")]
         [Required(ErrorMessage = "Please provide the department which incured the expense.")]
         public Nullable<int> FKDeptId { get; set; }
-        [DisplayName("Expense of Employee: ")]
-        //[Required(ErrorMessage = "Please provide the employee who incured the expense.")]
+
+        [DisplayName("Expense of Employee")]
         public Nullable<int> FKEmpId { get; set; }
+
         [DisplayName("Mode of Transaction")]
         [Required(ErrorMessage = "Please choose between credit or debit.")]
         public int FKTransModeId { get; set; }

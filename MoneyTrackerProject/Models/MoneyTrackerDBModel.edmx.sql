@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/13/2021 02:38:50
+-- Date Created: 10/06/2021 21:44:58
 -- Generated from EDMX file: C:\Users\benva\source\repos\MoneyTrackerProject\MoneyTrackerProject\Models\MoneyTrackerDBModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [MoneyTrackerDB];
+USE [TheMoneyTrackerDB];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -65,9 +65,7 @@ CREATE TABLE [dbo].[Employees] (
     [EmployeeName] nvarchar(max)  NOT NULL,
     [EmployeeRole] nvarchar(max)  NOT NULL,
     [DeptId] int  NOT NULL,
-    [EmployeeEmail] nvarchar(max)  NOT NULL,
-    [UserName] nvarchar(max)  NOT NULL,
-    [Password] nvarchar(max)  NOT NULL
+    [EmployeeEmail] nvarchar(max)  NOT NULL
 );
 GO
 

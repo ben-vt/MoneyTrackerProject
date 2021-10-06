@@ -24,9 +24,11 @@ namespace MoneyTrackerProject.Models
         }
     
         public int DepartmentId { get; set; }
+
         [DisplayName("Department Name")]
-        [Required(ErrorMessage ="Please provide a department name.")]
+        [Required(ErrorMessage = "Please provide a department name.")]
         public string DepartmentName { get; set; }
+
         [DisplayName("Department Fund")]
         [Required(ErrorMessage = "Please provide the department's fund allocation.")]
         public string DepartmentFund { get; set; }

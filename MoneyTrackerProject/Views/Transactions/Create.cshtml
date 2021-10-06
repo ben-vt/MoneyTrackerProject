@@ -34,7 +34,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FKDeptId, "FKDeptId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FKDeptId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("FKDeptId", (SelectList)ViewBag.FKDeptId, "Select", htmlAttributes: new { @onchange = "FillEmployees()", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FKDeptId, "", new { @class = "text-danger" })
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FKEmpId, "FKEmpId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FKEmpId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.FKEmpId, (SelectList)ViewBag.FKEmpId, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FKEmpId, "", new { @class = "text-danger" })
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FKTransModeId, "FKTransModeId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FKTransModeId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("FKTransModeId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FKTransModeId, "", new { @class = "text-danger" })
@@ -85,8 +85,7 @@
             $('#TransactionDate').datepicker({
                 format: "dd/mm/yyyy",
                 autoclose: true,
-                onclose: function () { $(this).valid(); },
-                onselect: function () { $("#TransactionDate").valid(); }
+                onclose: function () { $(this).valid(); }
             });
             //$("#TransactionDate").datepicker("setDate", "20/08/2021");
         });
