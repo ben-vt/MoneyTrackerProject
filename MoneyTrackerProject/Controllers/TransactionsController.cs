@@ -65,6 +65,13 @@ namespace MoneyTrackerProject.Controllers
             return View(transaction);
         }
 
+        public JsonResult GetEmployeeList(int DepartmentId) 
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Employee> EmployeeList = db.Employees.Where(emp => emp.DeptId == DepartmentId).ToList();
+            return Json(EmployeeList, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Transactions/Edit/5
         public ActionResult Edit(int? id)
         {
