@@ -10,6 +10,7 @@ using MoneyTrackerProject.Models;
 
 namespace MoneyTrackerProject.Controllers
 {
+    [Authorize]
     public class TransactionsController : Controller
     {
         private MoneyTrackerDBModelContainer db = new MoneyTrackerDBModelContainer();

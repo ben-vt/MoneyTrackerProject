@@ -85,7 +85,8 @@
             $('#TransactionDate').datepicker({
                 format: "dd/mm/yyyy",
                 autoclose: true,
-                onclose: function () { $(this).valid(); }
+                onclose: function () { $(this).valid(); },
+                onselect: function () { $("#TransactionDate").valid(); }
             });
             //$("#TransactionDate").datepicker("setDate", "20/08/2021");
         });
