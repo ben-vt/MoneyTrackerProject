@@ -17,53 +17,71 @@
     {
         @Html.ActionLink("Create New", "Create");
     }
-    </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeRole)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Department.DepartmentName)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeRole)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department.DepartmentName)
-        </td>
-        <td>
-            @if (User.IsInRole("Administrator"))
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId });
-                <span> | </span>
-                @Html.ActionLink("Details", "Details", new { id = item.EmployeeId });
-                <span> | </span>
-                @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeId });
-            }
-            else
-            {
-                @Html.ActionLink("Details", "Details", new { id = item.EmployeeId });
-            }
-        </td>
-    </tr>
-}
+</p>
+<table id="EmpTable" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department.DepartmentName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeRole)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId });
+                        <span> | </span>
+                        @Html.ActionLink("Details", "Details", new { id = item.EmployeeId });
+                        <span> | </span>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeId });
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.EmployeeId });
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#EmpTable').DataTable({
+                "pagingType": "full_numbers",
+                "order": [[3, "asc"]]
+            });
+        });
+    </script>
+}
