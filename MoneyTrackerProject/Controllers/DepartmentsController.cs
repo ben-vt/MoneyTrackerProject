@@ -6,10 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using MoneyTrackerProject.Models;
 
 namespace MoneyTrackerProject.Controllers
 {
+    [Authorize]
     public class DepartmentsController : Controller
     {
         private MoneyTrackerDBModelContainer db = new MoneyTrackerDBModelContainer();
@@ -17,7 +20,23 @@ namespace MoneyTrackerProject.Controllers
         // GET: Departments
         public ActionResult Index()
         {
-            return View(db.Departments.ToList());
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userId = User.Identity.GetUserId();
+            IEnumerable<String> roleId = userManager.FindById(userId).Roles.Select(r => r.RoleId);
+            int role_id = Convert.ToInt32(roleId.ElementAt(0));
+            if (role_id == 4)
+            {
+                return View(db.Departments.ToList());
+            }
+            else if (roleId != null && roleId.GetEnumerator().MoveNext())
+            {
+                var department = db.Departments.Where(d => d.DepartmentId == role_id);
+                return View(department);
+            }
+            else
+            {
+                return View("~/Views/Home/Unauthorized.cshtml");
+            }
         }
 
         // GET: Departments/Details/5

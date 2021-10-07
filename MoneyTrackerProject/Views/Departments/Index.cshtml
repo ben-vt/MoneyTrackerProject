@@ -11,8 +11,11 @@
     Use this section to create entries for the departments of the company.
     <br />
     <br />
-    @Html.ActionLink("Create New", "Create")
-</p>
+    @if (User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Create New", "Create");
+    }
+    </p>
 <table class="table">
     <tr>
         <th>
@@ -33,9 +36,18 @@
             @Html.DisplayFor(modelItem => item.DepartmentFund)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DepartmentId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.DepartmentId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DepartmentId })
+            @if (User.IsInRole("Administrator"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentId });
+                <span> | </span>
+                @Html.ActionLink("Details", "Details", new { id = item.DepartmentId });
+                <span> | </span>
+                @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentId })
+            }
+            else
+            {
+                @Html.ActionLink("Details", "Details", new { id = item.DepartmentId });
+            }
         </td>
     </tr>
 }
