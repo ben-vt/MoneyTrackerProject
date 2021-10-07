@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using MoneyTrackerProject.Models;
 using Microsoft.AspNet.Identity;
-using System.Web.Security;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace MoneyTrackerProject.Controllers
@@ -24,10 +23,16 @@ namespace MoneyTrackerProject.Controllers
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var userId = User.Identity.GetUserId();
             IEnumerable<String> roleId = userManager.FindById(userId).Roles.Select(r => r.RoleId);
-            if (roleId != null && roleId.GetEnumerator().MoveNext())
+            int role_id = Convert.ToInt32(roleId.ElementAt(0));
+            //here 4 is the roleId for Administrator.Administrator can view all transactions.
+            if (role_id == 4)
             {
-                int rid = Convert.ToInt32(roleId.ElementAt(0));
-                var transactions = db.Transactions.Where(t => t.FKDeptId == rid);
+                var transactions = db.Transactions.Include(t => t.Department).Include(t => t.Employee).Include(t => t.TransactionMode);
+                return View(transactions.ToList());
+            }
+            else if (roleId != null && roleId.GetEnumerator().MoveNext())
+            {
+                var transactions = db.Transactions.Where(t => t.FKDeptId == role_id);
                 //var transactions = db.Transactions.Include(t => t.Department).Include(t => t.Employee).Include(t => t.TransactionMode);
                 return View(transactions.ToList());
             }
@@ -55,7 +60,19 @@ namespace MoneyTrackerProject.Controllers
         // GET: Transactions/Create
         public ActionResult Create()
         {
-            ViewBag.FKDeptId = new SelectList(db.Departments, "DepartmentId", "DepartmentName");
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userId = User.Identity.GetUserId();
+            IEnumerable<String> roleId = userManager.FindById(userId).Roles.Select(r => r.RoleId);
+            int role_id = Convert.ToInt32(roleId.ElementAt(0));
+            //here 4 is the roleId for Administrator.Administrator can view all transactions.
+            if (role_id == 4)
+            {
+                ViewBag.FKDeptId = new SelectList(db.Departments, "DepartmentId", "DepartmentName");
+            }
+            else if (roleId != null && roleId.GetEnumerator().MoveNext())
+            {
+                ViewBag.FKDeptId = new SelectList(db.Departments.Where(d=>d.DepartmentId == role_id), "DepartmentId", "DepartmentName");
+            }
             ViewBag.FKEmpId = new SelectList(db.Employees, "EmployeeId", "EmployeeName");
             ViewBag.FKTransModeId = new SelectList(db.TransactionModes, "ModeId", "Mode");
             return View();

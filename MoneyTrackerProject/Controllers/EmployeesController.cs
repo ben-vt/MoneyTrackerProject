@@ -7,9 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MoneyTrackerProject.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace MoneyTrackerProject.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private MoneyTrackerDBModelContainer db = new MoneyTrackerDBModelContainer();
@@ -17,8 +20,25 @@ namespace MoneyTrackerProject.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.Department);
-            return View(employees.ToList());
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userId = User.Identity.GetUserId();
+            IEnumerable<String> roleId = userManager.FindById(userId).Roles.Select(r => r.RoleId);
+            int role_id = Convert.ToInt32(roleId.ElementAt(0));
+            //here 4 is the roleId for Administrator.Administrator can view all transactions.
+            if (role_id == 4)
+            {
+                var employees = db.Employees.Include(e => e.Department);
+                return View(employees.ToList());
+            }
+            else if (roleId != null && roleId.GetEnumerator().MoveNext())
+            {
+                var employees = db.Employees.Where(e => e.DeptId == role_id);
+                return View(employees.ToList());
+            }
+            else 
+            {
+                return View("~/Views/Home/Unauthorized.cshtml");
+            }
         }
 
         // GET: Employees/Details/5
@@ -62,6 +82,7 @@ namespace MoneyTrackerProject.Controllers
         }
 
         // GET: Employees/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

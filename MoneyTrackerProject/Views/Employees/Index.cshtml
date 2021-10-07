@@ -13,8 +13,11 @@
     Please also enter the department under which the employee is working.
     <br />
     <br />
-    @Html.ActionLink("Create New", "Create")
-</p>
+    @if (User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Create New", "Create");
+    }
+    </p>
 <table class="table">
     <tr>
         <th>
@@ -47,9 +50,18 @@
             @Html.DisplayFor(modelItem => item.Department.DepartmentName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EmployeeId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EmployeeId })
+            @if (User.IsInRole("Administrator"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId });
+                <span> | </span>
+                @Html.ActionLink("Details", "Details", new { id = item.EmployeeId });
+                <span> | </span>
+                @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeId });
+            }
+            else
+            {
+                @Html.ActionLink("Details", "Details", new { id = item.EmployeeId });
+            }
         </td>
     </tr>
 }
