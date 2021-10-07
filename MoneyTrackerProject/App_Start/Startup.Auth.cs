@@ -58,11 +58,11 @@ namespace MoneyTrackerProject
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "135894047893-4ifls9d0530gmoa3dh7n0g5h3enpri7q.apps.googleusercontent.com",
+                ClientSecret = "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"
+            });
         }
     }
 }

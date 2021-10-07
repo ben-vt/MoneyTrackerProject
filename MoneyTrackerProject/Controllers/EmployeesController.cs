@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 namespace MoneyTrackerProject.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class EmployeesController : Controller
     {
         private MoneyTrackerDBModelContainer db = new MoneyTrackerDBModelContainer();
