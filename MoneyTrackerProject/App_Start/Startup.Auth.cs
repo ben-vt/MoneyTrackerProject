@@ -54,9 +54,9 @@ namespace MoneyTrackerProject
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "406889280925821",
+               appSecret: "feb0d625b65e65c68529f95dd4444fd8");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
