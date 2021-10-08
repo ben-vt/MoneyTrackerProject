@@ -13,6 +13,7 @@ using MoneyTrackerProject.Models;
 namespace MoneyTrackerProject.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class DepartmentsController : Controller
     {
         private MoneyTrackerDBModelContainer db = new MoneyTrackerDBModelContainer();

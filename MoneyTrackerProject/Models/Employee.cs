@@ -28,11 +28,12 @@ namespace MoneyTrackerProject.Models
         [Required(ErrorMessage = "Please provide the employee's name.")]
         public string EmployeeName { get; set; }
 
+        [DisplayName("Position")]
         [Required(ErrorMessage = "Please provide the employee's role.")]
         public string EmployeeRole { get; set; }
         public int DeptId { get; set; }
 
-        [DisplayName("Employee Email")]
+        [DisplayName("Email")]
         [Required(ErrorMessage = "Please provide the employee's email address.")]
         public string EmployeeEmail { get; set; }
     
