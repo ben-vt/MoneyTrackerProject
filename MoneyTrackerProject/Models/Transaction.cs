@@ -23,7 +23,6 @@ namespace MoneyTrackerProject.Models
         }
     
         public int TransactionId { get; set; }
-
         [DisplayName("Amount")]
         [Required(ErrorMessage = "Please provide the amount.")]
         public decimal ExpenseAmount { get; set; }
@@ -46,7 +45,7 @@ namespace MoneyTrackerProject.Models
         [DisplayName("Transaction Description")]
         [Required(ErrorMessage = "Please provide a description of the transaction.")]
         public string TransactionDescription { get; set; }
-    
+
         public virtual Department Department { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual TransactionMode TransactionMode { get; set; }

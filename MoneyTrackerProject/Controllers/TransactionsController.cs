@@ -92,11 +92,11 @@ namespace MoneyTrackerProject.Controllers
                 var currentDept = db.Departments.SingleOrDefault(d => d.DepartmentId == transaction.FKDeptId);
                 if (transaction.FKTransModeId == 1)
                 {
-                    currentDept.DepartmentFund += transaction.ExpenseAmount;
-                }
-                else 
-                {
                     currentDept.DepartmentFund -= transaction.ExpenseAmount;
+                }
+                else
+                {
+                    currentDept.DepartmentFund += transaction.ExpenseAmount;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -139,11 +139,11 @@ namespace MoneyTrackerProject.Controllers
                 var currentDept = db.Departments.SingleOrDefault(d => d.DepartmentId == transaction.FKDeptId);
                 if (transaction.FKTransModeId == 1)
                 {
-                    currentDept.DepartmentFund += transaction.ExpenseAmount;
+                    currentDept.DepartmentFund -= transaction.ExpenseAmount;
                 }
                 else
                 {
-                    currentDept.DepartmentFund -= transaction.ExpenseAmount;
+                    currentDept.DepartmentFund += transaction.ExpenseAmount;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -175,16 +175,16 @@ namespace MoneyTrackerProject.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Transaction transaction = db.Transactions.Find(id);
-            db.Transactions.Remove(transaction);
             var currentDept = db.Departments.SingleOrDefault(d => d.DepartmentId == transaction.FKDeptId);
             if (transaction.FKTransModeId == 1)
             {
-                currentDept.DepartmentFund -= transaction.ExpenseAmount;
+                currentDept.DepartmentFund += transaction.ExpenseAmount;
             }
             else
             {
-                currentDept.DepartmentFund += transaction.ExpenseAmount;
+                currentDept.DepartmentFund -= transaction.ExpenseAmount;
             }
+            db.Transactions.Remove(transaction);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -23,7 +23,6 @@ namespace MoneyTrackerProject.Models
         }
     
         public int EmployeeId { get; set; }
-
         [DisplayName("Employee Name")]
         [Required(ErrorMessage = "Please provide the employee's name.")]
         public string EmployeeName { get; set; }
@@ -36,7 +35,7 @@ namespace MoneyTrackerProject.Models
         [DisplayName("Email")]
         [Required(ErrorMessage = "Please provide the employee's email address.")]
         public string EmployeeEmail { get; set; }
-    
+
         public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }

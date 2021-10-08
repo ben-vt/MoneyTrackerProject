@@ -33,7 +33,7 @@
     </Key>
     <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DepartmentName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DepartmentFund" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DepartmentFund" Type="decimal" Nullable="false" />
   </EntityType>
   <EntityType Name="Employees">
     <Key>
@@ -144,7 +144,7 @@
           </Key>
           <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="DepartmentFund" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DepartmentFund" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="MoneyTrackerDBModel.DepartmentEmployee" FromRole="Department" ToRole="Employee" />
           <NavigationProperty Name="Transactions" Relationship="MoneyTrackerDBModel.DepartmentTransaction" FromRole="Department" ToRole="Transaction" />
         </EntityType>
