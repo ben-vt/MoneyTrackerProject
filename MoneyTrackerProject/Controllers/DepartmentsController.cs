@@ -56,6 +56,7 @@ namespace MoneyTrackerProject.Controllers
         }
 
         // GET: Departments/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -79,6 +80,7 @@ namespace MoneyTrackerProject.Controllers
         }
 
         // GET: Departments/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -110,6 +112,7 @@ namespace MoneyTrackerProject.Controllers
         }
 
         // GET: Departments/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

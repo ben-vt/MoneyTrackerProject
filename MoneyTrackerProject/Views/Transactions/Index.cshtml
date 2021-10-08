@@ -19,9 +19,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ExpenseAmount)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.TransactionDate)
             </th>
             <th>
@@ -34,6 +31,9 @@
                 @Html.DisplayNameFor(model => model.Employee.EmployeeName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ExpenseAmount)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.TransactionMode.Mode)
             </th>
             <th></th>
@@ -43,31 +43,31 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExpenseAmount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TransactionDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TransactionDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Department.DepartmentName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TransactionMode.Mode)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.TransactionId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.TransactionId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.TransactionId })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpenseAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionMode.Mode)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TransactionId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TransactionId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TransactionId })
+            </td>
+        </tr>
         }
     </tbody>
 
@@ -81,7 +81,7 @@
         $(document).ready(function () {
             $('#TxnTable').DataTable({
                 "pagingType": "full_numbers",
-                "order": [[0, "desc"]]
+                "order": [[4, "desc"]]
             });
         });
     </script>

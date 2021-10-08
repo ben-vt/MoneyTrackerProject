@@ -89,6 +89,15 @@ namespace MoneyTrackerProject.Controllers
             if (ModelState.IsValid)
             {
                 db.Transactions.Add(transaction);
+                var currentDept = db.Departments.SingleOrDefault(d => d.DepartmentId == transaction.FKDeptId);
+                if (transaction.FKTransModeId == 1)
+                {
+                    currentDept.DepartmentFund += transaction.ExpenseAmount;
+                }
+                else 
+                {
+                    currentDept.DepartmentFund -= transaction.ExpenseAmount;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -97,13 +106,6 @@ namespace MoneyTrackerProject.Controllers
             ViewBag.FKEmpId = new SelectList(db.Employees, "EmployeeId", "EmployeeName", transaction.FKEmpId);
             ViewBag.FKTransModeId = new SelectList(db.TransactionModes, "ModeId", "Mode", transaction.FKTransModeId);
             return View(transaction);
-        }
-
-        public JsonResult GetEmployeeList(int DepartmentId) 
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            List<Employee> EmployeeList = db.Employees.Where(emp => emp.DeptId == DepartmentId).ToList();
-            return Json(EmployeeList, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Transactions/Edit/5
@@ -134,6 +136,15 @@ namespace MoneyTrackerProject.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(transaction).State = EntityState.Modified;
+                var currentDept = db.Departments.SingleOrDefault(d => d.DepartmentId == transaction.FKDeptId);
+                if (transaction.FKTransModeId == 1)
+                {
+                    currentDept.DepartmentFund += transaction.ExpenseAmount;
+                }
+                else
+                {
+                    currentDept.DepartmentFund -= transaction.ExpenseAmount;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -165,6 +176,15 @@ namespace MoneyTrackerProject.Controllers
         {
             Transaction transaction = db.Transactions.Find(id);
             db.Transactions.Remove(transaction);
+            var currentDept = db.Departments.SingleOrDefault(d => d.DepartmentId == transaction.FKDeptId);
+            if (transaction.FKTransModeId == 1)
+            {
+                currentDept.DepartmentFund -= transaction.ExpenseAmount;
+            }
+            else
+            {
+                currentDept.DepartmentFund += transaction.ExpenseAmount;
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }

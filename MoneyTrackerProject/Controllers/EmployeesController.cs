@@ -58,6 +58,7 @@ namespace MoneyTrackerProject.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.DeptId = new SelectList(db.Departments, "DepartmentId", "DepartmentName");
@@ -117,6 +118,7 @@ namespace MoneyTrackerProject.Controllers
         }
 
         // GET: Employees/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -140,6 +142,13 @@ namespace MoneyTrackerProject.Controllers
             db.Employees.Remove(employee);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public JsonResult GetEmployeeList(int DepartmentId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Employee> EmployeeList = db.Employees.Where(emp => emp.DeptId == DepartmentId).ToList();
+            return Json(EmployeeList, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

@@ -95,7 +95,7 @@
         function FillEmployees() {
             var DepartmentId = $('#FKDeptId').val();
             $.ajax({
-                url: '/Transactions/GetEmployeeList',
+                url: '/Employees/GetEmployeeList',
                 type: "GET",
                 dataType: "JSON",
                 data: { DepartmentId: DepartmentId },
