@@ -27,5 +27,12 @@ namespace MoneyTrackerProject.Controllers
 
             return View();
         }
+
+        public ActionResult Unauthorized()
+        {
+            ViewBag.Message = "Unauthorized.";
+
+            return View();
+        }
     }
 }
