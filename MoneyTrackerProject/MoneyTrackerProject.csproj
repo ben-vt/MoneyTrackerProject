@@ -182,6 +182,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SendEmailsController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
+    <Compile Include="Controllers\Upload_FilesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +217,8 @@
     <Compile Include="Models\TransactionMode.cs">
       <DependentUpon>MoneyTrackerDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UploadFileModel.cs" />
+    <Compile Include="Models\Upload_Files.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\SendEmail.cs" />
@@ -561,8 +564,15 @@
     <Content Include="Views\Transactions\Index.cshtml" />
     <Content Include="Views\Home\Unauthorized.cshtml" />
     <Content Include="Views\SendEmails\SendEmails.cshtml" />
+    <Content Include="Views\Upload_Files\Create.cshtml" />
+    <Content Include="Views\Upload_Files\Delete.cshtml" />
+    <Content Include="Views\Upload_Files\Details.cshtml" />
+    <Content Include="Views\Upload_Files\Edit.cshtml" />
+    <Content Include="Views\Upload_Files\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Uploads\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
