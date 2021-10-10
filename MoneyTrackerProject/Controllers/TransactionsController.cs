@@ -24,20 +24,27 @@ namespace MoneyTrackerProject.Controllers
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var userId = User.Identity.GetUserId();
             IEnumerable<String> roleId = userManager.FindById(userId).Roles.Select(r => r.RoleId);
-            int role_id = Convert.ToInt32(roleId.ElementAt(0));
-            //here 4 is the roleId for Administrator.Administrator can view all transactions.
-            if (role_id == 4)
+            try
             {
-                var transactions = db.Transactions.Include(t => t.Department).Include(t => t.Employee).Include(t => t.TransactionMode);
-                return View(transactions.ToList());
+                int role_id = Convert.ToInt32(roleId.ElementAt(0));
+                //here 4 is the roleId for Administrator.Administrator can view all transactions.
+                if (role_id == 4 || role_id == 5)
+                {
+                    var transactions = db.Transactions.Include(t => t.Department).Include(t => t.Employee).Include(t => t.TransactionMode);
+                    return View(transactions.ToList());
+                }
+                else if (roleId != null && roleId.GetEnumerator().MoveNext())
+                {
+                    var transactions = db.Transactions.Where(t => t.FKDeptId == role_id);
+                    //var transactions = db.Transactions.Include(t => t.Department).Include(t => t.Employee).Include(t => t.TransactionMode);
+                    return View(transactions.ToList());
+                }
+                else
+                {
+                    return View("~/Views/Home/Unauthorized.cshtml");
+                }
             }
-            else if (roleId != null && roleId.GetEnumerator().MoveNext())
-            {
-                var transactions = db.Transactions.Where(t => t.FKDeptId == role_id);
-                //var transactions = db.Transactions.Include(t => t.Department).Include(t => t.Employee).Include(t => t.TransactionMode);
-                return View(transactions.ToList());
-            }
-            else
+            catch
             {
                 return View("~/Views/Home/Unauthorized.cshtml");
             }

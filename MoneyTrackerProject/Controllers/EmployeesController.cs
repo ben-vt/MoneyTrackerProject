@@ -24,19 +24,26 @@ namespace MoneyTrackerProject.Controllers
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var userId = User.Identity.GetUserId();
             IEnumerable<String> roleId = userManager.FindById(userId).Roles.Select(r => r.RoleId);
-            int role_id = Convert.ToInt32(roleId.ElementAt(0));
-            //here 4 is the roleId for Administrator.Administrator can view all transactions.
-            if (role_id == 4)
+            try
             {
-                var employees = db.Employees.Include(e => e.Department);
-                return View(employees.ToList());
+                int role_id = Convert.ToInt32(roleId.ElementAt(0));
+                //here 4 is the roleId for Administrator. Administrator can view all transactions.
+                if (role_id == 4 || role_id == 5)
+                {
+                    var employees = db.Employees.Include(e => e.Department);
+                    return View(employees.ToList());
+                }
+                else if (roleId != null && roleId.GetEnumerator().MoveNext())
+                {
+                    var employees = db.Employees.Where(e => e.DeptId == role_id);
+                    return View(employees.ToList());
+                }
+                else
+                {
+                    return View("~/Views/Home/Unauthorized.cshtml");
+                }
             }
-            else if (roleId != null && roleId.GetEnumerator().MoveNext())
-            {
-                var employees = db.Employees.Where(e => e.DeptId == role_id);
-                return View(employees.ToList());
-            }
-            else 
+            catch
             {
                 return View("~/Views/Home/Unauthorized.cshtml");
             }

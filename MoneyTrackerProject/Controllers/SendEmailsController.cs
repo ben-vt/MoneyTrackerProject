@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MoneyTrackerProject.Controllers
 {
+    [Authorize]
     public class SendEmailsController : Controller
     {
         // GET: SendEmails
@@ -30,14 +31,12 @@ namespace MoneyTrackerProject.Controllers
                     String toEmail = model.ToEmail;
                     String subject = model.Subject;
                     String contents = model.Contents;
-
+                    HttpPostedFileBase pathToFile = model.PathToFile;
                     SendEmail es = new SendEmail();
-                    es.Send(toEmail, subject, contents);
+                    es.Send(toEmail, subject, contents, pathToFile);
 
                     ViewBag.Result = "Email has been sent.";
-
                     ModelState.Clear();
-
                     return View(new SendEmailsViewModel());
                 }
                 catch
