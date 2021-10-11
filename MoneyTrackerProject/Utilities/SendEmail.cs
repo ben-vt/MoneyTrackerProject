@@ -18,16 +18,16 @@ namespace MoneyTrackerProject.Utilities
             var client = new SendGridClient(API_KEY);
             var from = new EmailAddress("benvargheset@gmail.com", "MoneyTracker Mail Service");
             var to = new EmailAddress(toEmail, "");
-            //var plainTextContent = contents;
+            var plainTextContent = contents;
             var htmlContent = "<p>" + contents + "</p>";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, "");
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             if (pathToFile != null)
             {
                 string fileName = Path.GetFileName(pathToFile.FileName);
                 string filepath = Path.Combine(HttpContext.Current.Server.MapPath("~/Uploads"), fileName);
-                //var bytes = File.ReadAllBytes(fileName);
-                //var file = Convert.ToBase64String(bytes);
-                msg.AddAttachment(fileName, filepath);
+                var bytes = File.ReadAllBytes(filepath);
+                var file = Convert.ToBase64String(bytes);
+                msg.AddAttachment(fileName, file);
             }
             var response = client.SendEmailAsync(msg);
         }
