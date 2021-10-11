@@ -11,7 +11,7 @@ namespace MoneyTrackerProject.Utilities
     public class SendEmail
     {
         // Please use your API KEY here.
-        private const String API_KEY = "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";
+        private const String API_KEY = "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";
 
         public void Send(String toEmail, String subject, String contents, HttpPostedFileBase pathToFile)
         {
