@@ -74,6 +74,7 @@ namespace MoneyTrackerProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "DepartmentId,DepartmentName,DepartmentFund")] Department department)
         {
             if (ModelState.IsValid)

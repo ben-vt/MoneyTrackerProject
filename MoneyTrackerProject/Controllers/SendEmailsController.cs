@@ -22,6 +22,8 @@ namespace MoneyTrackerProject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult SendEmails(SendEmailsViewModel model)
         {
             if (ModelState.IsValid)

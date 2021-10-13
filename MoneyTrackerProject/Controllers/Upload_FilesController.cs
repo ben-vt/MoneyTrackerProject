@@ -11,6 +11,7 @@ using MoneyTrackerProject.Models;
 
 namespace MoneyTrackerProject.Controllers
 {
+    [Authorize]
     public class Upload_FilesController : Controller
     {
         private UploadFileModel db = new UploadFileModel();
