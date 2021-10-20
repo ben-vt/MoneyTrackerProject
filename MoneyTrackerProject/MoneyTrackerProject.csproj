@@ -180,6 +180,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Controllers\SendEmailsController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\Upload_FilesController.cs" />
@@ -210,6 +211,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MoneyTrackerDBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Rating.cs" />
+    <Compile Include="Models\RatingsModel.cs" />
     <Compile Include="Models\SendEmailsViewModel.cs" />
     <Compile Include="Models\Transaction.cs">
       <DependentUpon>MoneyTrackerDBModel.tt</DependentUpon>
@@ -569,6 +572,11 @@
     <Content Include="Views\Upload_Files\Details.cshtml" />
     <Content Include="Views\Upload_Files\Edit.cshtml" />
     <Content Include="Views\Upload_Files\Index.cshtml" />
+    <Content Include="Views\Ratings\Create.cshtml" />
+    <Content Include="Views\Ratings\Delete.cshtml" />
+    <Content Include="Views\Ratings\Details.cshtml" />
+    <Content Include="Views\Ratings\Edit.cshtml" />
+    <Content Include="Views\Ratings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\" />
