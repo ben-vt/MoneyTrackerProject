@@ -213,6 +213,7 @@
     </Compile>
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\RatingsModel.cs" />
+    <Compile Include="Models\SendBulkEmailsViewModel.cs" />
     <Compile Include="Models\SendEmailsViewModel.cs" />
     <Compile Include="Models\Transaction.cs">
       <DependentUpon>MoneyTrackerDBModel.tt</DependentUpon>
@@ -224,6 +225,7 @@
     <Compile Include="Models\Upload_Files.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\SendBulkEmail.cs" />
     <Compile Include="Utilities\SendEmail.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -577,6 +579,7 @@
     <Content Include="Views\Ratings\Details.cshtml" />
     <Content Include="Views\Ratings\Edit.cshtml" />
     <Content Include="Views\Ratings\Index.cshtml" />
+    <Content Include="Views\SendEmails\SendBulk.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\" />
