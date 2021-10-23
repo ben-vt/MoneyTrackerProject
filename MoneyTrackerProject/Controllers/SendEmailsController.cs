@@ -101,7 +101,8 @@ namespace MoneyTrackerProject.Controllers
                         String subject = model.Subject;
                         String contents = model.Contents;
                         SendBulkEmail es = new SendBulkEmail();
-                        es.Send(toEmail, subject, contents);
+                        HttpPostedFileBase pathToFile = model.PathToFile;
+                        es.Send(toEmail, subject, contents, pathToFile);
 
                         ViewBag.Result = "Email has been sent.";
                         ModelState.Clear();

@@ -16,5 +16,8 @@ namespace MoneyTrackerProject.Models
         public string Subject { get; set; }
         [Required(ErrorMessage = "Please enter the email content")]
         public string Contents { get; set; }
+
+        [Required]
+        public HttpPostedFileBase PathToFile { get; set; }
     }
 }
