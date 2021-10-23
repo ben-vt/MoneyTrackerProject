@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Overall Report</h2>
+<div id="pieChart"> </div>
+<hr />
+<h2>Expense and Profit Report</h2>
+<div id="barChart"> </div>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var MSiteName = [];
+            var MasterJson;
+            $.ajax({
+                type: "GET",
+                url: "/Chart/PieChart",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: "true",
+                cache: "false",
+                success: function (response) {
+                    successFunc(response);
+                },
+            });
+
+            function successFunc(jsondata) {
+                var data = {};
+                var deptNames = [];
+                jsondata.forEach(function (e) {
+                    deptNames.push(e.DepartmentName);
+                    data[e.DepartmentName] = e.DepartmentFund;
+                })
+                var chart = c3.generate({
+                    bindto: '#pieChart',
+                    data: {
+                        json: [data],
+                        keys: {
+                            value: deptNames,
+                        },
+                        type: 'pie'
+                    },
+                    color: {
+                        pattern: ['#1f77b4', '#A575FF', '#ff7f0e']
+                    },
+                    pie: {
+                        label: {
+                            format: function (value, ratio, id) {
+                                return value;
+                            }
+                        }
+                    }
+                });
+            }
+            $.ajax({
+                type: "GET",
+                url: "/Chart/BarChart",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    successFunct(response);
+                },
+            });
+
+            function successFunct(jsondata) {
+                var txnNames = [];
+                jsondata.forEach(function (e) {
+                    txnNames.push(e.DEPTNAME);
+                })
+                var chart = c3.generate({
+                    bindto: '#barChart',
+                    data: {
+                        json: jsondata,
+                        keys: {
+                            value: ['EXPENSE', 'PROFIT'],
+                        },
+                        columns: ['EXPENSE', 'PROFIT'],
+                        type: 'bar'
+                    },
+                    axis: {
+                        x: {
+                            type: 'category',
+                            categories: txnNames
+                        }
+                    },
+                    grid: {
+                        y: { show: true }
+                    },
+                    color: {
+                        pattern: ['#d62728', '#98df8a']
+                    },
+                });
+            }
+
+        });
+    </script>
+}
+
