@@ -15,41 +15,56 @@
     {
         @Html.ActionLink("Create New", "Create");
     }
-    </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartmentName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartmentFund)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartmentName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartmentFund)
-        </td>
-        <td>
-            @if (User.IsInRole("Administrator"))
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentId });
-                <span> | </span>
-                @Html.ActionLink("Details", "Details", new { id = item.DepartmentId });
-                <span> | </span>
-                @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentId })
-            }
-            else
-            {
-                @Html.ActionLink("Details", "Details", new { id = item.DepartmentId });
-            }
-        </td>
-    </tr>
-}
+</p>
+<table id="DeptTable" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentFund)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentFund)
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentId });
+                        <span> | </span>
+                        @Html.ActionLink("Details", "Details", new { id = item.DepartmentId });
+                        <span> | </span>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentId })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.DepartmentId });
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#DeptTable').DataTable({
+                "pagingType": "full_numbers",
+                "order": [[1, "asc"]]
+            });
+        });
+    </script>
+}

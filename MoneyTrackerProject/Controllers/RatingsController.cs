@@ -104,6 +104,7 @@ namespace MoneyTrackerProject.Controllers
             return View(rating);
         }
 
+        [Authorize(Roles = "Administrator")]
         // GET: Ratings/Delete/5
         public ActionResult Delete(int? id)
         {

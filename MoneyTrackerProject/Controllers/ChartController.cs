@@ -8,6 +8,7 @@ using MoneyTrackerProject.Models;
 
 namespace MoneyTrackerProject.Controllers
 {
+    [Authorize(Roles = "Administrator, Manager")]
     public class ChartController : Controller
     {
         // GET: Chart
