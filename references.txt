@@ -1,0 +1,15 @@
+References:
+1. cascading dropdown: https://forums.asp.net/t/2100365.aspx?changing+dropdown+list+based+on+another+dropdown+in+mvc
+2. comparing roleId and DepartmentId:
+https://stackoverflow.com/questions/5047349/how-to-check-if-ienumerable-is-null-or-empty
+3. Updating database value https://stackoverflow.com/questions/25894587/how-to-update-record-using-entity-framework-6
+4. Pagify - Datatable https://datatables.net/examples/basic_init/table_sorting.html
+5. Find average star rating - https://techbrij.com/sum-total-avg-table-footer-asp-net-mvc-razor ,
+	https://stackoverflow.com/questions/47188222/how-to-send-an-email-using-sendgrid-v3-to-multiple-recipients-in-a-net-app
+6. Charts : C3 https://forums.asp.net/t/2128444.aspx?C3+chart+with+JSON+dynamic+data
+7. Serialization error https://stackoverflow.com/questions/1153385/a-circular-reference-was-detected-while-serializing-an-object-of-type-subsonic
+8. Convert date in json: https://stackoverflow.com/questions/20841466/how-to-convert-json-date-format-to-normal-date-format-ex-date1388412591038
+9. Plotting bar chart: https://jsfiddle.net/cyril123/8aL1stcs/2/
+	https://www.c-sharpcorner.com/article/asp-net-mvc5-generate-bar-chart-using-javascript-c3-chart-library-and-entity-f/
+10. fullcalendar.io/docs
+11. Momentjs.com/docs
