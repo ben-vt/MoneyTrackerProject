@@ -16,14 +16,14 @@ namespace MoneyTrackerProject.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your new application description page.";
+            ViewBag.Message = "The MoneyTracker Project";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact Us";
 
             return View();
         }

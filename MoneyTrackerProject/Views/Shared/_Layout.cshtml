@@ -21,6 +21,10 @@
         .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-nav > li > a:hover {
             color: white;
         }
+
+        .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -41,11 +45,40 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Department", "Index", "Departments")</li>
-                        <li>@Html.ActionLink("Employee", "Index", "Employees")</li>
-                        <li>@Html.ActionLink("Transaction", "Index", "Transactions")</li>
-                        <li>@Html.ActionLink("Send Email", "SendEmails", "SendEmails")</li>
-                        <li>@Html.ActionLink("Upload File", "Index", "Upload_Files")</li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Information & Transactions
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Department", "Index", "Departments")</li>
+                                <li>@Html.ActionLink("Employee", "Index", "Employees")</li>
+                                <li>@Html.ActionLink("Transaction", "Index", "Transactions")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Mail & Files
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Send Email", "SendEmails", "SendEmails")</li>
+                                <li>@Html.ActionLink("Bulk Email", "SendBulk", "SendEmails")</li>
+                                <li>@Html.ActionLink("Upload File", "Index", "Upload_Files")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Others
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Reports", "Index", "Chart")</li>
+                                <li>@Html.ActionLink("Rate Us", "Index", "Ratings")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            </ul>
+                        </li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -63,7 +96,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script src="~/Scripts/notify.min.js" defer></script>
     <script src="~/Scripts/bootstrap-datepicker.js" defer></script>
     <script src="~/Scripts/bootstrap-datepicker.min.js" defer></script>
     <script src="~/Scripts/DataTables/jquery.dataTables.js" defer></script>
