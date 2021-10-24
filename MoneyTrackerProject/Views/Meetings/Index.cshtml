@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MoneyTrackerProject.Models.Meeting>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Meetings</h2>
+<div id="calendar"></div>
+@if (TempData != null)
+{
+    @Html.Raw(TempData["msg"])
+}
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Start)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="meetings">
+                <td class="title">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td class="start">
+                    @Html.DisplayFor(modelItem => item.Start)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section Scripts
+{
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/fullcalendar.min.js"></script>
+    <link href="~/Content/fullcalendar.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var events = [];
+            $(".meetings").each(function () {
+                var title = $(".title", this).text().trim();
+                var start = $(".start", this).text().trim();
+                var start1 = moment(start).format();
+                alert(start1);
+                var event = {
+                    "title": title,
+                    "start": start1
+                };
+                events.push(event);
+            });
+
+            $("#calendar").fullCalendar({
+                locale: 'au',
+                events: events,
+                dayClick: function (date, allDay, jsEvent, view) {
+                    var d = new Date(date);
+                    var m = moment(d).format("YYYY-MM-DD");
+                    m = encodeURIComponent(m);
+                    var uri = "/Meetings/Create?date=" + m;
+                    $(location).attr('href', uri);
+                },
+                eventClick: function (calEvent, jsEvent, view) {
+                    alert("Meeting Name: " + calEvent.title);
+                }
+            });
+        });
+    </script>
+}
