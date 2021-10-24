@@ -10,6 +10,7 @@ using MoneyTrackerProject.Models;
 
 namespace MoneyTrackerProject.Controllers
 {
+    [Authorize]
     public class MeetingsController : Controller
     {
         private MeetingsModel db = new MeetingsModel();
